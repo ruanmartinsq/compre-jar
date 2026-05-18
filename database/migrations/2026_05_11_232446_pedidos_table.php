@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->date('data_pedido');
+            $table->string('user_id');
+            $table->integer('data_pedido');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

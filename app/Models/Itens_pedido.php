@@ -2,26 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Attributes\Table;
 
+#[Fillable(['pedido_id','produto_id','quantidade','preco'])]
+#[Table('itens_pedidos')]
 class ItemPedido extends Model
 {
-    protected $table = 'itens_pedido';
+    use SoftDeletes;
 
-    protected $fillable = [
-        'usuario_id',
-        'produto_id',
-        'quantidade',
-        'preco',
-    ];
-
-    public function usuario()
+    public function pedido()
     {
-        return $this->belongsTo(User::class, 'usuario_id');
+        return $this->belongsTo(Pedido::class, 'pedido_id');
     }
 
     public function produto()
     {
-        return $this->belongsTo(Produto::class, 'produto_id');
+        return $this->hasOne(Produto::class, 'id', 'produto_id');
     }
 }
