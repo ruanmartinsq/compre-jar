@@ -50,7 +50,7 @@ class PedidoController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Erro ao criar pedido: ' . $e->getMessage());
-
+            
             return response()->json(['message' => 'Erro ao criar pedido'], 500);
         }
     }
