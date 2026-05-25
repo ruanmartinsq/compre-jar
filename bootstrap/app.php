@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'pedido.owner' => \App\Http\Middleware\EnsurePedidoOwner::class,
+            'produto.owner' => \App\Http\Middleware\EnsureProdutoOwner::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

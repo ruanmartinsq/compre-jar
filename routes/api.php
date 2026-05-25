@@ -30,9 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('pedidos')->group(function () {
         Route::get('/', [PedidoController::class, 'index']);
         Route::post('/', [PedidoController::class, 'store']);
-        Route::get('/{id}', [PedidoController::class, 'show']);
-        Route::put('/{id}', [PedidoController::class, 'update'])->middleware('pedido.owner');
-        Route::delete('/{id}', [PedidoController::class, 'destroy'])->middleware('pedido.owner');
+        Route::get('/{id}', [PedidoController::class, 'show'])->whereNumber('id');
+        Route::put('/{id}', [PedidoController::class, 'update'])->middleware('pedido.owner')->whereNumber('id');
+        Route::delete('/{id}', [PedidoController::class, 'destroy'])->middleware('pedido.owner')->whereNumber('id');
     });
 
     Route::prefix('itens-pedido')->group(function () {
